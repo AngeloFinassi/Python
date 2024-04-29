@@ -23,6 +23,12 @@ def UP():
     rect_y -= move
     rect_y = max(0, rect_y)
 
+#Funcionalidades
+def div(num1, size):
+    div = int((num1 / size)) * size
+    return div
+
+
 #Var Tela
 screen_width = 800
 screen_height = 600
@@ -39,7 +45,7 @@ move = 20
 
 #Configuração do relógio
 clock = pygame.time.Clock()
-FPS = 15
+FPS = 10
 
 #Var iniciais
 running = True
@@ -48,15 +54,20 @@ move_up = False
 case1 = False
 case2 = False
 
-apple_x = random.randint(0, screen_width - size)
-apple_y = random.randint(0, screen_height - size)
-pygame.draw.rect(screen, (255, 0, 0), (apple_x, apple_y, size, size))
+# Posição inicial da maçã
+apple_x = div(random.randint(0, (screen_width - size)), size)
+apple_y = div(random.randint(0, (screen_height - size)), size)
 
 #Texto
 font = pygame.font.SysFont(None, 36)
 score = 0
 
+#Funcionalidade Corpo cobra
+rect_body = list()
+rect_body.append([rect_x, rect_y])
+
 while running:
+    print(rect_body)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -91,26 +102,43 @@ while running:
         else:
             DOWN()
     
-    #Maçã
-    apple_x = random.randint(0, screen_width - size)
-    apple_y = random.randint(0, screen_height - size)
-        
-    # Renderização do jogo
+    #Renderização do jogo
     screen.fill((0, 0, 0))
 
     text_surface = font.render("Pontuação: " + str(score), True, (255, 255, 255))
     screen.blit(text_surface, (10, screen_height - 40))
 
     #Cobra
-    pygame.draw.rect(screen, (125, 125, 125), (rect_x, rect_y, rect_width, rect_height))
+    for part in rect_body:
+        pygame.draw.rect(screen, (255, 255, 255), (part[0], part[1], rect_width, rect_height))
+    pygame.draw.rect(screen, (255, 255, 255), (rect_x, rect_y, rect_width, rect_height))
+
+    #Desenhar a maçã
+    pygame.draw.rect(screen, (255, 0, 0), (apple_x, apple_y, size, size))
+
+    #Verificar colisão da cobra com a maçã
     if rect_x == apple_x and rect_y == apple_y:
-        apple_x = random.randint(0, screen_width - size)
-        apple_y = random.randint(0, screen_height - size)
-        pygame.draw.rect(screen, (255, 0, 0), (apple_x, apple_y, size, size))
+        apple_x = div(random.randint(0, (screen_width - size)), size)
+        apple_y = div(random.randint(0, (screen_height - size)), size)
+        rect_body.append([rect_x, rect_y])
         score += 1
 
-    pygame.display.flip()
+    #Cria lista para cada nova parte do corpo
+    for c in (rect_x, rect_y):
+        rect_body[score][0] = rect_x
+        rect_body[score][1] = rect_y
 
+    #Atualiza cordenadas de cada parte do corpo, dps a da cabeça
+    for i in range(len(rect_body) -1, 0, -1):
+        rect_body[i] = rect_body[i - 1]
+    rect_body[0] = [rect_x, rect_y]
+
+    #Mecanismo de perder, caso a cabeça encoste em alguma parte do corpo
+    for part in rect_body[1:]:
+        if part[0] == rect_x and part[1] == rect_y:
+            running = False
+
+    pygame.display.flip()
     clock.tick(FPS)
 
 # Finalizando o Pygame
