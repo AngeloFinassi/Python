@@ -16,8 +16,9 @@ def bubble():
             draw()
             if numbers[k] > numbers[k + 1]:
                 numbers[k], numbers[k + 1] = numbers[k + 1], numbers[k]
-                pygame.display.flip()
-                time.sleep(times)
+            pygame.display.flip()
+            time.sleep(times)
+        
 
 def selection(numbers):
     for i in range(len(numbers)):
@@ -25,29 +26,33 @@ def selection(numbers):
         for k in range(1 + i, len(numbers)):
             draw()
             if numbers[k] < numbers[min_index]:
-                min_index = k
-                pygame.display.flip()
-                time.sleep(times)
+                min_index = k     
         numbers[min_index], numbers[i] = numbers[i], numbers[min_index]
+        pygame.display.flip()
+        time.sleep(times)
         
 
 # Define as dimensões da janela
-screen_widht, screen_height = 1920, 800
+screen_widht, screen_height = 1200, 800
 screen = pygame.display.set_mode((screen_widht, screen_height))
 pygame.display.set_caption('Sorted Simulation')
 
 #atualização da Tela
-FPS = 60
+FPS = 120
 clock = pygame.time.Clock()
 
 #Vars
-size = 10
-times = 0.0001
+size = 1
+times = 0
 numbers = []
 temporary_size = screen_height
 
 #numberList
-numbers = [screen_height - size * k for k in range(int(screen_widht / size))]
+numbers = [
+    screen_height - size * k 
+    for k in range(int(screen_widht / size)) 
+    if screen_height - size * k > 0
+]
 random.shuffle(numbers)
 
 
@@ -63,4 +68,3 @@ while True:
     print(numbers)
     time.sleep(3)
     break
-    
