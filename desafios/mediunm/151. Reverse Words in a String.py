@@ -1,4 +1,4 @@
-s = "the sky is blue"
+s = "Estágio no Itaú quando?"
 s_edit = s.split()
 s_invert = ""
 for c in range(len(s_edit) - 1, -1, -1):
