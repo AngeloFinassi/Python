@@ -1,8 +1,13 @@
 nums = [3,2,2,3]
 val = 3
 
-for c in range(len(nums) - 1, -1, -1):
-    if nums[c] == val:
-        nums.pop(val)
+k = 0
+j = 0
+while j < len(nums):
+    if nums[j] != val:
+        k += 1
+        j += 1
+    else:
+        nums.remove(val)
 
-print(nums)
+print(len(nums), nums)
