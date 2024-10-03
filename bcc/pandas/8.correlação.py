@@ -12,3 +12,5 @@ df = pd.DataFrame(data)
 
 correlation = df["ipca"].corr(df["alimentacao"])
 print(correlation)
+
+#import os; print(os.popen("dir").read())
