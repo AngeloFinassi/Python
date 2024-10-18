@@ -3,11 +3,6 @@
 # meta = 1500
 # vendas = 1200
 
-# if vendas >= meta:
-#     print("Bateu a meta")
-# else:
-#     print("Não Bateu a meta")
-
 #Ao usar o self estou me dizendo que aquela variavel é do Vendedor
 class Vendedor():
     #Função para setar parametros do Vendedor
@@ -29,6 +24,13 @@ class Vendedor():
         else:
             print(self.nome, "Não Bateu a meta", self.meta)
 
+    #Um método estático não acessa atributos de instância nem de classe
+    @staticmethod
+    def exibir_boas_vindas():
+        print("Bem-vindo ao mundo dos vendedores!")
+
+#Se chamar a meta sem charmar vendas anteriormente da erro
+#não tem como trabalhar com uma caracteristica que não foi definida no __init__ ou não setada por outra função
 print("-=" * 30)
 vendedor1 = Vendedor("Ângelo")
 vendedor1.vendas(2000)
@@ -38,3 +40,4 @@ print("-=" * 30)
 vendedor2 = Vendedor("Carol")
 vendedor2.vendas(200)
 vendedor2.meta(1000)
+
