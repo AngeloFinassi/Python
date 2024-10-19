@@ -29,7 +29,7 @@ class LinkedList:
         while temp:
             print(temp.data, end=" -> ")
             temp = temp.next
-        print("None")  # Indica o fim da lista
+        print("None")
 
 # Criando uma lista vazia
 llist = LinkedList()
