@@ -1,43 +1,44 @@
 class Node:
-    def __init__(self, data):
-        self.data = data  # Dado armazenado no nó
-        self.next = None  # Inicialmente, não há próximo nó
+    def __init__ (self, data):
+        self.data = data
+        self.next = None
 
 class LinkedList:
     def __init__(self):
-        self.head = None  # Inicialmente, a lista está vazia (sem cabeça)
+        self.head = None
+    
+    def Insert_Data_beginning(self, data):
+        new_node = Node(data)
+        #ponteiro do new_node aponta para o valor que o head apontava
+        new_node.next = self.head
+        #head aponta para new_node
+        self.head = new_node
+        #head -> new_node -> None
 
-    #Inserção Início
-    def insert_at_beginning(self, new_data):
-        new_node = Node(new_data)  # Cria um novo nó com os dados
-        new_node.next = self.head  # O novo nó aponta para o atual primeiro nó
-        self.head = new_node  # O novo nó agora é o primeiro (head)
-
-    #Inserção Final
-    def insert_at_end(self, new_data):
-        new_node = Node(new_data)
-        if self.head is None:  # Se a lista está vazia, o novo nó será o head
+    def Insert_Data_end(self, data):
+        new_node = Node(data)
+        if self.head == None:
             self.head = new_node
             return
-        last = self.head
-        while last.next:  # Percorre até o último nó
-            last = last.next
-        last.next = new_node  # O último nó agora aponta para o novo nó
+        
+        last_node = self.head
+        while last_node.next:
+            last_node = last_node.next
+        last_node.next = new_node
 
+    
     def print_list(self):
-        temp = self.head
-        while temp:
-            print(temp.data, end=" -> ")
-            temp = temp.next
-        print("None")
+        current_node = self.head
+        #is not = intervalo fechado de !=, inclui o != 2, = [0,1], is not 2 = [0,1,2]
+        while current_node is not None:
+            print(current_node.data, end=' -> ')
+            #current node assume o valor do ponteiro que aponta para o data do próx nó
+            current_node = current_node.next
+    
+ll1 = LinkedList()
+ll1.Insert_Data_beginning(20)
+ll1.Insert_Data_end(10)
+ll1.Insert_Data_beginning(30)
+ll1.print_list()
 
-# Criando uma lista vazia
-llist = LinkedList()
-
-# Inserindo elementos
-llist.insert_at_beginning(10)
-llist.insert_at_beginning(20)
-llist.insert_at_end(30)
-
-# Exibindo a lista
-llist.print_list()
+#Se começar adicionando no final, não tera valor none, pois o head -> none, passara head -> new_node
