@@ -42,7 +42,7 @@ FPS = 120
 clock = pygame.time.Clock()
 
 #Vars
-size = 1
+size = 20
 times = 0
 numbers = []
 temporary_size = screen_height
