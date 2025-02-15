@@ -1,89 +1,67 @@
-import sys
-import random
-from enum import Enum
+import argparse
+from random import randint
 
+def Challenge(name, range):
+    pl_name = name
+    pc_wins = 0
+    pl_wins = 0
 
-def rps():
-    game_count = 0
-    player_wins = 0
-    python_wins = 0
+    def GuessNumber_Game():
+        nonlocal pl_name, pc_wins, pl_wins, range
+        win_var = 3
 
-    def play_rps():
-        nonlocal player_wins
-        nonlocal python_wins
+        chose_number = randint(0, range)
+        p_chose_number = int(input(f"Write a number between 0 and {range}: "))
 
-        class RPS(Enum):
-            ROCK = 1
-            PAPER = 2
-            SCISSORS = 3
+        #Some normal mistake
+        if p_chose_number > range or p_chose_number < 0:
+            p_chose_number = int(input(f"Please a number in the corrent interval (0 to {range}): "))
 
-        playerchoice = input(
-            "\nEnter... \n1 for Rock,\n2 for Paper, or \n3 for Scissors:\n\n")
-
-        if playerchoice not in ["1", "2", "3"]:
-            print("You must enter 1, 2, or 3.")
-            return play_rps()
-
-        player = int(playerchoice)
-
-        computerchoice = random.choice("123")
-
-        computer = int(computerchoice)
-
-        print(f"\nYou chose {str(RPS(player)).replace('RPS.', '').title()}.")
-        print(
-            f"Python chose {str(RPS(computer)).replace('RPS.', '').title()}.\n"
-        )
-
-        def decide_winner(player, computer):
-            nonlocal player_wins
-            nonlocal python_wins
-            if player == 1 and computer == 3:
-                player_wins += 1
-                return "🎉 You win!"
-            elif player == 2 and computer == 1:
-                player_wins += 1
-                return "🎉 You win!"
-            elif player == 3 and computer == 2:
-                player_wins += 1
-                return "🎉 You win!"
-            elif player == computer:
-                return "😲 Tie game!"
+        #Game
+        if pc_wins < win_var and pl_wins < win_var:
+            if p_chose_number == chose_number:
+                print("\nUhu, you win!")
+                pl_wins += 1
             else:
-                python_wins += 1
-                return "🐍 Python wins!"
+                print(f"\nNah, you lose! The Machine chose {chose_number}.")
+                pc_wins += 1
 
-        game_result = decide_winner(player, computer)
+            print("\nSCOREBOARD:")
+            print(f"Python Points: {pc_wins}\nPlayer Points: {pl_wins}\n")
 
-        print(game_result)
+        #If the game and
+        if pc_wins == win_var:
+            print(f"\nHum... Sorry, it wasn't this time ;-; The Machine chose {chose_number}!")
+            print(f"\nFinal Score - Python: {pc_wins} | Player: {pl_wins}")
+            return
 
-        nonlocal game_count
-        game_count += 1
+        elif pl_wins == win_var:
+            print(f"\nCongratulations! You win! The number was: {chose_number}")
+            print(f"\nFinal Score - Python: {pc_wins} | Player: {pl_wins}")
+            return
 
-        print(f"\nGame count: {str(game_count)}")
-        print(f"\nPlayer wins: {str(player_wins)}")
-        print(f"\nPython wins: {str(python_wins)}")
+    return GuessNumber_Game
 
-        print("\nPlay again?")
+#arguments to give the informaiton to the game
+parser = argparse.ArgumentParser(
+    description="Play a Game"
+)
 
-        while True:
-            playagain = input("\nY for Yes or \nQ to Quit\n")
-            if playagain.lower() not in ["y", "q"]:
-                continue1
-            else:
-                break
+parser.add_argument(
+    '-n', '--name', metavar = 'name', required=True, help="The name of the player"
+)
 
-        if playagain.lower() == "y":
-            return play_rps()
-        else:
-            print("\n🎉🎉🎉🎉")
-            print("Thank you for playing!\n")
-            sys.exit("Bye! 👋")
+parser.add_argument(
+    '-r', '--range', metavar='range', required=True, help='Give the Range of the "Guess the Number Game"'
+)
 
-    return play_rps
+game_info = parser.parse_args()
+play = Challenge(game_info.name, int(game_info.range))
 
-
-rock_paper_scissors = rps()
-
-if __name__ == "__main__":
-    rock_paper_scissors()
+#loop that run the game
+while True:
+    play()
+    stop = input("\nDo you want to continue? (Y/N): ").strip().lower()
+    if stop not in ['y', 'yes', 'Y', 'YES']:
+        print("\nThanks for playing!")
+        break
