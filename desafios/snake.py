@@ -45,7 +45,7 @@ move = 20
 
 #Configuração do relógio
 clock = pygame.time.Clock()
-FPS = 10
+FPS = 20
 
 #Var iniciais
 running = True
@@ -134,9 +134,9 @@ while running:
     rect_body[0] = [rect_x, rect_y]
 
     #Mecanismo de perder, caso a cabeça encoste em alguma parte do corpo
-    for part in rect_body[1:]:
+    '''for part in rect_body[1:]:
         if part[0] == rect_x and part[1] == rect_y:
-            running = False
+            running = False'''
 
     pygame.display.flip()
     clock.tick(FPS)
