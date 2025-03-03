@@ -5,6 +5,7 @@ class JustNotCoolError(Exception):
 x = 2
 #first step
 try:
+    #personalize Error
     raise JustNotCoolError("This just isn't cool, man.")
     # raise Exception("I'm a custom exception!")
     # print(x / 0)
