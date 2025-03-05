@@ -1,0 +1,86 @@
+RESUMO OQ TA ACONTECENDO
+<------------>
+Views: Funções que processam requisições e retornam respostas (HTML, JSON, etc.).
+URLs: Mapeiam as rotas (endpoints) para as views correspondentes.
+Templates: Arquivos HTML dinâmicos que exibem os dados processados pelas views.
+Migrations: Arquivos que controlam mudanças no banco de dados com base nos models.
+Models: Definem a estrutura dos dados (tabelas) usados no banco de dados.
+Banco de Dados: Armazena os dados do sistema, gerenciado pelos models e migrations.
+
+Banco de Dados Pronto (migrate)
+Modelo Criado (makemigrations + migrate)
+Painel Admin Configurado (createsuperuser)
+Tela de Login Automática (Admin do Django já inclui isso)
+
+
+CONFIGURANDO
+<------------>
+
+para rodar django
+
+criar ambiente venv
+django-admin startproject Project -> carrega estrutura django:
+
+Diretório: D:\CC - Learning\Python\django\project
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        05/03/2025     11:46                project
+-a----        05/03/2025     11:46            685 manage.py
+
+py manage.py migrate -> instalar pacotes
+
+py manage.py runserver ->roda o html default
+abre tipo um server q mostra quem entrou e talz...
+
+py manage.py startapp core ->cria outro projeto 'core'
+
+por padrão cria um esquema que cada *.py tem uma função especifica
+
+core/templates/core/idnex.html -> ali cria o front end
+
+NÃO ESTAVA ECNONTRANDO TEMPLATES/CORE/INDEX.HTML mexe no dir na settins.py ->'DIRS': [BASE_DIR / "core/templates"],
+
+
+HTML MEXENDO
+<------------>
+usa o index.html como estrutura base e para cada conteúdo diferente usa extend para carregar em arquivos diferentes e n repetir código como o base.html
+
+no index:
+
+{% extends 'core/base.html'%}
+
+{% block content %}
+    <h1>The front page</h1>
+{% endblock %}
+
+
+no base
+
+ <!-- contet that will render in the index.html -->
+        {% block content %}
+        {% endblock %}
+
+Usar extends não é obrigatório, mas é boas práticas para projetos maiores. Para algo muito simples, usar um único index.html pode até funcionar, mas conforme o projeto cresce, você provavelmente vai querer dividir melhor o código.
+
+
+ADD OTHERS PAGES
+<------------>
+toda pagina do site devo adicionar nas urls:
+urlpatterns = [
+    path('', index, name='index'),
+    path('contact/', contact, name='contact'),
+    path('admin/', admin.site.urls),
+]
+
+assim ao entrar em http://127.0.0.1:8000/contact/ entro na pagina html, que usa estrutra do bloc.html assim como o index.html
+
+
+DATA BANK
+<------------>
+migrate: Aplica as migrações do banco de dados.
+makemigrations: Cria novas migrações com base nas mudanças nos modelos.
+createsuperuser: Cria um usuário admin para acessar o painel do Django.
+
+
