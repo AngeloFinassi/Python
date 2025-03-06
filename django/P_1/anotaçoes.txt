@@ -83,13 +83,4 @@ migrate: Aplica as migrações do banco de dados.
 makemigrations: Cria novas migrações com base nas mudanças nos modelos.
 createsuperuser: Cria um usuário admin para acessar o painel do Django.
 
-Explicando melhor:
-Dentro da classe Meta, existem várias opções que o Django interpreta automaticamente. Algumas delas são:
-
-verbose_name → Define o nome singular do modelo.
-verbose_name_plural → Define o nome plural do modelo.
-ordering → Define a ordenação padrão ao buscar registros.
-permissions → Define permissões personalizadas.
-db_table → Permite definir o nome da tabela no banco de dados.
-
 
