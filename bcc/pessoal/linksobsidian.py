@@ -1,16 +1,23 @@
-def format_salas_para_obsidian(texto):
+def formatar_salas_para_links(texto, nome_arquivo_saida="salas_formatadas.txt"):
     linhas = texto.strip().splitlines()
-    saida_formatada = []
+    salas_formatadas = []
 
     for linha in linhas:
         linha = linha.strip()
         if linha and not linha.lower().startswith("section"):
-            #Remove qualquer emoji e pontuação
             nome = linha.replace("✔️", "").strip()
-            saida_formatada.append(f"- [[{nome}]]")
+            salas_formatadas.append(f"link[[{nome}]]")
 
-    return "\n".join(saida_formatada)
+    resultado = ", ".join(salas_formatadas)
 
+    #Salvar no arquivo txt
+    with open(nome_arquivo_saida, "w", encoding="utf-8") as f:
+        f.write(resultado)
+
+    print(f"✅ Arquivo '{nome_arquivo_saida}' criado com sucesso!")
+
+
+# Entrada de exemplo
 entrada = """
 Intro to Endpoint Security
 Core Windows Processes
@@ -21,7 +28,7 @@ Osquery: The Basics
 Wazuh
 Monday Monitor
 Retracted
-Introduction to SIEM
+Introduction to SIEM ✔️
 Investigating with ELK 101
 ItsyBitsy
 Splunk: Basics
@@ -45,5 +52,5 @@ Critical
 Secret Recipe
 """
 
-# Exibir resultado
-print(format_salas_para_obsidian(entrada))
+# Executar
+formatar_salas_para_links(entrada)
