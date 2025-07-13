@@ -2,19 +2,30 @@ input_text = """
 Task 1
 Introduction
 Task 2
-Hash Functions
+What is Intruder
 Task 3
-Insecure Password Storage for Authentication
+Positions
 Task 4
-Using Hashing for Secure Password Storage
+Payloads
 Task 5
-Recognising Password Hashes
+Introduction to Attack Types
 Task 6
-Password Cracking
+Sniper
 Task 7
-Hashing for Integrity Checking
+Battering Ram
 Task 8
+Pitchfork
+Task 9
+Cluster Bomb
+Task 10
+Practical Example
+Task 11
+Practical Challenge
+Task 12
+Extra Mile Challenge
+Task 13
 Conclusion
+
 """
 
 linhas = input_text.strip().split('\n')
