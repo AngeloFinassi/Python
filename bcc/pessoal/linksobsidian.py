@@ -1,56 +1,42 @@
-def formatar_salas_para_links(texto, nome_arquivo_saida="salas_formatadas.txt"):
+def salvar_links_em_linha(texto, nome_arquivo_saida="salas_links.txt"):
     linhas = texto.strip().splitlines()
-    salas_formatadas = []
+    links_formatados = []
 
     for linha in linhas:
         linha = linha.strip()
         if linha and not linha.lower().startswith("section"):
             nome = linha.replace("✔️", "").strip()
-            salas_formatadas.append(f"link[[{nome}]]")
+            links_formatados.append(f"link[[{nome}]]")
 
-    resultado = ", ".join(salas_formatadas)
-
-    #Salvar no arquivo txt
     with open(nome_arquivo_saida, "w", encoding="utf-8") as f:
-        f.write(resultado)
+        for link in links_formatados:
+            f.write(link + "\n")
 
     print(f"✅ Arquivo '{nome_arquivo_saida}' criado com sucesso!")
 
 
 # Entrada de exemplo
 entrada = """
-Intro to Endpoint Security
-Core Windows Processes
-Sysinternals
-Windows Event Logs
-Sysmon
-Osquery: The Basics
-Wazuh
-Monday Monitor
-Retracted
-Introduction to SIEM ✔️
-Investigating with ELK 101
-ItsyBitsy
-Splunk: Basics
-Incident handling with Splunk
-Investigating with Splunk
-Benign
-DFIR: An Introduction
-Windows Forensics 1
-Windows Forensics 2
-Linux Forensics
-Autopsy
-Redline
-KAPE
-Volatility
-Velociraptor
-TheHive Project
-Intro to Malware Analysis
-Unattended
-Disgruntled
-Critical
-Secret Recipe
+Phishing Analysis Fundamentals
+
+Phishing Emails in Action
+
+Phishing Analysis Tools
+
+Phishing Prevention
+
+The Greenholt Phish
+
+Snapped Phish-ing Line
+
+Tempest
+
+Boogeyman 1
+
+Boogeyman 2
+
+Boogeyman 3
 """
 
 # Executar
-formatar_salas_para_links(entrada)
+salvar_links_em_linha(entrada)
