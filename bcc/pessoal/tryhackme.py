@@ -2,30 +2,21 @@ input_text = """
 Task 1
 Introduction
 Task 2
-What is Intruder
+Windows Privilege Escalation
 Task 3
-Positions
+Harvesting Passwords from Usual Spots
 Task 4
-Payloads
+Other Quick Wins
 Task 5
-Introduction to Attack Types
+Abusing Service Misconfigurations
 Task 6
-Sniper
+Abusing dangerous privileges
 Task 7
-Battering Ram
+Abusing vulnerable software
 Task 8
-Pitchfork
+Tools of the Trade
 Task 9
-Cluster Bomb
-Task 10
-Practical Example
-Task 11
-Practical Challenge
-Task 12
-Extra Mile Challenge
-Task 13
 Conclusion
-
 """
 
 linhas = input_text.strip().split('\n')

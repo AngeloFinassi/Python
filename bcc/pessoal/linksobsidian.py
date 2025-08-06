@@ -17,25 +17,16 @@ def salvar_links_em_linha(texto, nome_arquivo_saida="salas_links.txt"):
 
 # Entrada de exemplo
 entrada = """
-Phishing Analysis Fundamentals
-
-Phishing Emails in Action
-
-Phishing Analysis Tools
-
-Phishing Prevention
-
-The Greenholt Phish
-
-Snapped Phish-ing Line
-
-Tempest
-
-Boogeyman 1
-
-Boogeyman 2
-
-Boogeyman 3
+Task 1
+What is Penetration Testing?
+Task 2
+Penetration Testing Ethics
+Task 3
+Penetration Testing Methodologies
+Task 4
+Black box, White box, Grey box Penetration Testing
+Task 5
+Practical: ACME Penetration Test
 """
 
 # Executar
